@@ -1,0 +1,12 @@
+applications:
+- name: apptio-usage-service
+  buildpack: go_buildpack
+env:
+  CF_USAGE_API: https://app-usage.system.pcf.com
+  CF_API: https://api.system.pcf.com
+  CF_SKIP_SSL_VALIDATION: true
+  CF_USERNAME: usage-user
+  CF_PASSWORD: password
+  BASIC_USERNAME: basic
+  BASIC_PASSWORD: basic
+  GOPACKAGENAME: github.com/pivotalservices/apptio-usage-service
