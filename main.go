@@ -98,15 +98,14 @@ func AppUsageReport(c echo.Context) error {
 	usageReport, err := GetAppUsageReport(cfClient, year, month)
 
 	if err != nil {
-		log.Fatal(err)
-		return err
+		return stacktrace.Propagate(err, "Couldn't get usage report")
 	}
 	return c.JSON(http.StatusOK, usageReport)
 }
 
 func GetAppUsageReport(client *cfclient.Client, year int, month int) (*AppUsage, error) {
 	if month > 12 || month < 1 {
-		return nil, stacktrace.NewError("Month must between 1-12")
+		return nil, stacktrace.NewError("Month must be between 1-12")
 	}
 
 	orgs, err := client.ListOrgs()
